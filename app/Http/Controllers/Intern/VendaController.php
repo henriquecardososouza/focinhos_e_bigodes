@@ -42,9 +42,9 @@ class VendaController extends Controller
                 )
             ->groupBy(
                 "vendas.codigo",
+                "clientes.nome",
+                "funcionarios.nome",
                 "data",
-                "cliente",
-                "funcionario",
                 "valor"
             );
 
