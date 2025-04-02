@@ -5,7 +5,7 @@ composer install --no-dev --working-dir=/var/www/html
 composer update
 
 echo "Seeding database"
-php artisan db:seed
+php artisan db:seed --force
 
 echo "Installing libraries"
 npm install

@@ -41,7 +41,7 @@ class CreateFuncionarios extends Seeder
             "salario" => 1000 * 100
         ]);
 
-        Funcionario::updateOrreate([
+        Funcionario::updateOrCreate([
             "cpf" => "11111111111",
         ], [
             "nome" => "Admin",
@@ -51,6 +51,6 @@ class CreateFuncionarios extends Seeder
             "credencial" => $credencial->email
         ]);
 
-        echo "Default funcionario created";
+        echo "\nDefault funcionario created\n";
     }
 }
