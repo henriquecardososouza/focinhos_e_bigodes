@@ -35,7 +35,7 @@ class PetController extends Controller
                 ->select(
                     "pets.codigo as codigo",
                     "pets.nome as nome",
-                    DB::raw("DATE_FORMAT(pets.data_nasc, '%d/%m/%Y') as data_nasc"),
+                    env("DB_CONNECTION") === "mysql" ? DB::raw("DATE_FORMAT(pets.data_nasc, '%d/%m/%Y') as data_nasc") : DB::raw("to_char(pets.data_nasc, 'DD/MM/YYYY') as data_nasc"),
                     "racas.nome as raca",
                     "racas.tipo as tipo",
                 );
@@ -156,7 +156,7 @@ class PetController extends Controller
             ->select(
                 "vacinas.nome as nome",
                 "pet_has_vacina.dose as dose",
-                DB::raw("DATE_FORMAT(pet_has_vacina.data, '%d/%m/%Y') as data"),
+                env("DB_CONNECTION") === "mysql" ? DB::raw("DATE_FORMAT(pet_has_vacina.data, '%d/%m/%Y') as data") : DB::raw("to_char(pet_has_vacina.data, 'DD/MM/YYYY') as data"),
             );
 
         return DataTables::of($vacinas)

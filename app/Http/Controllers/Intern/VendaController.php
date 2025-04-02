@@ -35,7 +35,7 @@ class VendaController extends Controller
                 ->leftJoin("produtos", "produtos.codigo", "=", "venda_has_produtos.produto")
                 ->select(
                     "vendas.codigo",
-                    DB::raw("DATE_FORMAT(vendas.data, '%d/%m/%Y %H:%i') as data"),
+                    env("DB_CONNECTION") === "mysql" ? DB::raw("DATE_FORMAT(vendas.data, '%d/%m/%Y %H:%i') as data") : DB::raw("to_char(vendas.data, 'DD/MM/YYYY HH:MI') as data"),
                     "clientes.nome as cliente",
                     "funcionarios.nome as funcionario",
                     DB::raw("CONCAT('R$ ', ROUND(SUM(produtos.valor * venda_has_produtos.quantidade) / 100, 2)) as valor"),

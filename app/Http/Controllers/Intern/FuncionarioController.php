@@ -204,7 +204,7 @@ class FuncionarioController extends Controller
                 "pets.nome as pet",
                 DB::raw("IF (cliente_contrata_servico.agendado, 'Sim', 'Não') AS agendado"),
                 DB::raw("IF (cliente_contrata_servico.estado, 'Realizado', 'Não realizado') AS estado"),
-                DB::raw("DATE_FORMAT(cliente_contrata_servico.data, '%d/%m/%Y') as data"),
+                env("DB_CONNECTION") === "mysql" ? DB::raw("DATE_FORMAT(cliente_contrata_servico.data, '%d/%m/%Y') as data") : DB::raw("to_char(cliente_contrata_servico.data, 'DD/MM/YYYY') as data"),
             );
 
         return DataTables::of($servicos)
