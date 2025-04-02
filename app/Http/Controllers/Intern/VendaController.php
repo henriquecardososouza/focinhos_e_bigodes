@@ -41,7 +41,7 @@ class VendaController extends Controller
                     DB::raw("CONCAT('R$ ', ROUND(SUM(produtos.valor * venda_has_produtos.quantidade) / 100, 2)) as valor"),
                 )
             ->groupBy(
-                "codigo",
+                "vendas.codigo",
                 "data",
                 "cliente",
                 "funcionario",
