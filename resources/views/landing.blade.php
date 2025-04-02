@@ -31,7 +31,7 @@
                             <div class="w-full h-full transition duration-500 transform-3d shadow-[0_0_10px_#000000AA] rounded-xl" :class="{ 'transform-[rotateY(180deg)]': isFlipped, 'bg-orange-500': isFlipped, 'text-gray-800': isFlipped }">
                                 <div class="rounded-xl absolute font-red-hat top-0 right-0 w-full h-full backface-hidden flex flex-col items-center justify-center text-2xl">
                                     <i class="fa-solid fa-bottle-water mb-4"></i>
-                                    <span class="font-bold">{{ $produto->nome }}</span>
+                                    <span class="font-bold text-center">{{ $produto->nome }}</span>
                                 </div>
 
                                 <div class="absolute p-2 text-center text-xl top-0 right-0 w-full h-full backface-hidden flex flex-col items-center justify-center transform-[rotateY(180deg)]">
@@ -54,7 +54,7 @@
                             <div class="w-full h-full transition duration-500 transform-3d shadow-[0_0_10px_#000000AA] rounded-xl" :class="{ 'transform-[rotateY(180deg)]': isFlipped, 'bg-orange-500': isFlipped, 'text-gray-800': isFlipped }">
                                 <div class="rounded-xl absolute font-red-hat top-0 right-0 w-full h-full backface-hidden flex flex-col items-center justify-center text-2xl">
                                     <i class="fa-solid fa-shower mb-4"></i>
-                                    <span class="font-bold">{{ $servico->tipo }}</span>
+                                    <span class="font-bold text-center">{{ $servico->tipo }}</span>
                                 </div>
 
                                 <div class="absolute p-2 text-center text-xl top-0 right-0 w-full h-full backface-hidden flex flex-col items-center justify-center transform-[rotateY(180deg)]">
