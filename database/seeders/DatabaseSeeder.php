@@ -14,5 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(CreateFuncionarios::class);
+        $this->call(CreateServicos::class);
+        $this->call(CreateTiposPet::class);
+        $this->call(CreateVacinas::class);
     }
 }

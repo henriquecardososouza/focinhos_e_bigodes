@@ -34,7 +34,7 @@ class VendaController extends Controller
                 ->leftJoin("venda_has_produtos", "venda_has_produtos.venda", "=", "vendas.codigo")
                 ->leftJoin("produtos", "produtos.codigo", "=", "venda_has_produtos.produto")
                 ->select(
-                    "vendas.codigo",
+                    "vendas.codigo as codigo",
                     env("DB_CONNECTION") === "mysql" ? DB::raw("DATE_FORMAT(vendas.data, '%d/%m/%Y %H:%i') as data") : DB::raw("to_char(vendas.data, 'DD/MM/YYYY HH:MI') as data"),
                     "clientes.nome as cliente",
                     "funcionarios.nome as funcionario",

@@ -50,7 +50,5 @@ class CreateFuncionarios extends Seeder
             "unidade" => $unidade->endereco,
             "credencial" => $credencial->email
         ]);
-
-        echo "\nDefault funcionario created\n";
     }
 }

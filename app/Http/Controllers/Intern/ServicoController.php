@@ -45,8 +45,8 @@ class ServicoController extends Controller
                     "funcionarios.nome as funcionario",
                     "atendente.nome as atendente",
                     "clientes.nome as cliente",
-                    DB::raw("IF(cliente_contrata_servico.agendado, 'Sim', 'Não') as agendado"),
-                    DB::raw("IF(cliente_contrata_servico.estado, 'Realizado', 'Não realizado') as estado"),
+                    DB::raw("CASE WHEN cliente_contrata_servico.agendado THEN 'Sim' ELSE 'Não' END as agendado"),
+                    DB::raw("CASE WHEN cliente_contrata_servico.estado THEN 'Realizado' ELSE 'Não realizado' END as estado"),
                     env("DB_CONNECTION") === "mysql" ? DB::raw("DATE_FORMAT(cliente_contrata_servico.data, '%d/%m/%Y') as data") : DB::raw("to_char(cliente_contrata_servico.data, 'DD/MM/YYYY') as data"),
                 );
 
