@@ -9,7 +9,7 @@ use App\Models\Funcionario;
 use App\Models\Unidade;
 use Illuminate\Database\Seeder;
 
-class CreateUnidades extends Seeder
+class CreateFuncionarios extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,38 +17,33 @@ class CreateUnidades extends Seeder
     public function run(): void
     {
         $endereco = Endereco::create([
-            "rua" => "Rosas azuis",
-            "numero" => "45",
-            "bairro" => "Centro",
-            "cidade" => "Montes Claros"
+            "rua" => "Rua 1",
+            "numero" => "1",
+            "bairro" => "Bairro",
+            "cidade" => "Cidade",
         ]);
-
 
         $unidade = Unidade::create([
             "endereco" => $endereco->id
         ]);
 
         $credencial = Credencial::create([
-            "email" => "funcionario_1@email",
-            "password" => bcrypt("senha")
+           "email" => "admin@admin.com",
+           "password" => bcrypt("123456")
         ]);
 
         $cargo = Cargo::create([
-            "nome" => "Vendedor",
-            "salario" => 100000
+            "nome" => "Administrador",
+            "salario" => 1000 * 100
         ]);
 
-        $funcionario = Funcionario::create([
-            "cpf" => "45387692863",
-            "nome" => "Fernando",
-            "telefone" => "7265748394",
+        Funcionario::create([
+            "cpf" => "11111111111",
+            "nome" => "Admin",
+            "telefone" => "1234567890",
             "cargo" => $cargo->nome,
             "unidade" => $unidade->endereco,
             "credencial" => $credencial->email
         ]);
-
-        $unidade->gerente = $funcionario->cpf;
-        $unidade->save();
-
     }
 }
