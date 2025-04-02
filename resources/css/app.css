@@ -1,0 +1,23 @@
+@import 'tailwindcss';
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-red-hat: 'Red Hat Display', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-dosis: 'Dosis', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-orange-500: #fce4dc;
+    --color-orange-600: #eccbbb;
+    --color-orange-700: #f3b595;
+    --color-orange-800: #f69367;
+    --color-orange-900: #fb8d50;
+    --color-brown-500: #594a4e;
+    --color-pink-500: #e78fb3;
+}
