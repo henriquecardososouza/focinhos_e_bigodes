@@ -23,7 +23,9 @@ class LandingPageController extends Controller
      */
     public function units(): View
     {
-        $unidades = Unidade::orderBy("endereco", "asc")->get();
+        $unidades = Unidade::query()
+            ->orderBy("endereco")
+            ->get();
         return view('units', compact('unidades'));
     }
 }

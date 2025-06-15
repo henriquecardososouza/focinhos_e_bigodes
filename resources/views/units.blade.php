@@ -14,7 +14,7 @@
                     <h1 class="font-red-hat text-2xl mb-4 font-bold">Unidade {{ $unidade->dadosEndereco->bairro }}</h1>
                     <dl class="flex gap-[20px]">
                         <dt class="font-bold w-[100px]">Gerente: </dt>
-                        <dd>{{ $unidade->dadosGerente->nome }}</dd>
+                        <dd>{{ $unidade->dadosGerente ? $unidade->dadosGerente->nome : "---" }}</dd>
                     </dl>
                     <dl class="flex gap-[20px]">
                         <dt class="font-bold w-[100px]">Rua: </dt>

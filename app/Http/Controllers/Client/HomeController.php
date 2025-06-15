@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cliente;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -13,6 +14,7 @@ class HomeController extends Controller
      */
     public function show(): View
     {
-        return view("client.home");
+        $user = Cliente::query()->find(auth()->user()->email);
+        return view("client.home", compact("user"));
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Intern;
 
 use App\Http\Controllers\Controller;
 use App\Models\Endereco;
+use App\Models\Funcionario;
 use App\Models\TipoPet;
 use App\Models\Unidade;
 use Illuminate\Http\JsonResponse;
@@ -28,7 +29,8 @@ class UnidadeController extends Controller
     {
         try {
             $unidades = Unidade::
-                leftJoin("enderecos", "enderecos.id", "=", "unidades.endereco")
+                query()
+                ->leftJoin("enderecos", "enderecos.id", "=", "unidades.endereco")
                 ->leftJoin("funcionarios", "funcionarios.cpf", "=", "unidades.gerente")
                 ->select(
                     "unidades.endereco as endereco",
@@ -39,14 +41,28 @@ class UnidadeController extends Controller
                     "enderecos.cidade",
                 );
 
-            return DataTables::of($unidades)->editColumn('acao', function ($unidade) {
+            $datatable = DataTables::of($unidades);
+
+            $datatable->editColumn('gerente', function ($unidade) {
+                if (!$unidade->gerente) {
+                    return "Sem gerente";
+                }
+
+                return $unidade->gerente;
+            });
+
+            $datatable->editColumn('acao', function ($unidade) {
                 $buttons = "";
 
                 $buttons .= '<a href="'.route('intern.unidade.update', $unidade->endereco).'" class="btn-edit rounded-lg mx-1 bg-orange-500 hover:bg-orange-600 transition duration-400 py-2 px-3 cursor-pointer">Editar</a>';
                 $buttons .= '<a data-unidade="'.$unidade->endereco.'" class="btn-delete rounded-lg mx-1 bg-orange-500 hover:bg-orange-600 transition duration-400 py-2 px-3 cursor-pointer">Excluir</a>';
 
                 return $buttons;
-            })->rawColumns(["acao"])->toJson();
+            });
+
+            $datatable->rawColumns(["acao"]);
+
+            return $datatable->toJson();
         }
 
         catch (\Exception $e) {
@@ -70,7 +86,7 @@ class UnidadeController extends Controller
             "numero" => "required",
             "bairro" => "required",
             "cidade" => "required",
-            "gerente" => "required|exists:funcionarios,cpf",
+            "gerente" => "required",
         ], [
             "rua" => "Preencha o campo rua",
             "numero" => "Preencha o campo numero",
@@ -83,22 +99,36 @@ class UnidadeController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 "message" => $validator->errors()->first()
-            ], 422);
+            ], 400);
         }
 
         $validated = $validator->validated();
 
-        $endereco = Endereco::create([
-            "rua" => $validated["rua"],
-            "numero" => $validated["numero"],
-            "bairro" => $validated["bairro"],
-            "cidade" => $validated["cidade"],
-        ]);
+        if ($validated["gerente"] !== "-1") {
+            if (!Funcionario::query()->find($validated["gerente"])) {
+                return response()->json([
+                    "message" => "Gerente não encontrado"
+                ], 400);
+            }
+        }
 
-        Unidade::create([
-            "endereco" => $endereco->id,
-            "gerente" => $validated["gerente"],
-        ]);
+        else {
+            $validated["gerente"] = null;
+        }
+
+        $endereco = Endereco::query()
+            ->create([
+                "rua" => $validated["rua"],
+                "numero" => $validated["numero"],
+                "bairro" => $validated["bairro"],
+                "cidade" => $validated["cidade"],
+            ]);
+
+        Unidade::query()
+            ->create([
+                "endereco" => $endereco->id,
+                "gerente" => $validated["gerente"],
+            ]);
 
         return response()->json([
             "message" => "Unidade criada com sucesso",
@@ -108,7 +138,8 @@ class UnidadeController extends Controller
 
     public function update(Unidade $unidade): View
     {
-        return view("intern.unidade.edit", compact("unidade"));
+        $funcionarios = Funcionario::all(["cpf", "nome"]);
+        return view("intern.unidade.edit", compact("unidade", "funcionarios"));
     }
 
     public function save(Request $request, Unidade $unidade): JsonResponse
@@ -118,7 +149,7 @@ class UnidadeController extends Controller
             "numero" => "required",
             "bairro" => "required",
             "cidade" => "required",
-            "gerente" => "required|exists:funcionarios,cpf",
+            "gerente" => "required",
         ], [
             "rua" => "Preencha o campo rua",
             "numero" => "Preencha o campo numero",
@@ -135,6 +166,18 @@ class UnidadeController extends Controller
         }
 
         $validated = $validator->validated();
+
+        if ($validated["gerente"] !== "-1") {
+            if (!Funcionario::query()->find($validated["gerente"])) {
+                return response()->json([
+                    "message" => "Gerente não encontrado"
+                ], 400);
+            }
+        }
+
+        else {
+            $validated["gerente"] = null;
+        }
 
         $unidade->dadosEndereco()->update([
             "rua" => $validated["rua"],

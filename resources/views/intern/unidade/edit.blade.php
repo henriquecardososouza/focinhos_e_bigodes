@@ -13,7 +13,8 @@
             <div class="flex flex-col gap-[5px] my-2">
                 <label for="gerente">Gerente</label>
                 <select class="border-1 border-orange-600 rounded-xl transition duration-400 py-2 px-3 focus:border-orange-800 focus:ring-0 focus:outline-0" id="gerente" name="gerente">
-                    @foreach(\App\Models\Funcionario::orderBy("nome", "ASC")->get() as $funcionario)
+                    <option value="-1" @if (!$unidade->gerente) selected @endif>Sem gerente</option>
+                    @foreach($funcionarios as $funcionario)
                         <option value="{{ $funcionario->cpf }}" @if ($funcionario->cpf === $unidade->gerente) selected @endif>{{ $funcionario->nome }}</option>
                     @endforeach
                 </select>
