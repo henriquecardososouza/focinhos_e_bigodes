@@ -69,12 +69,13 @@ class PetController extends Controller
     {
         $validator = Validator::make($request->all(), [
             "nome" => "required",
-            "data_nasc" => "required|date",
+            "data_nasc" => "required|date|before_or_equal:today",
             "raca" => "required|exists:racas,nome",
         ], [
             "nome" => "Preencha o campo nome",
-            "date.required" => "Preencha o campo de data de nascimento",
-            "date.date" => "Insira uma data de nascimento válida",
+            "data_nasc.required" => "Preencha o campo de data de nascimento",
+            "data_nasc.date" => "Insira uma data de nascimento válida",
+            "data_nasc.before" => "Insira uma data de nascimento igual ou anterior a data atual",
             "raca.required" => "Preencha o campo de raças",
             "raca.exists" => "Raça não encontrada",
         ]);

@@ -71,8 +71,18 @@
             </div>
 
             <div class="flex flex-col gap-[5px] my-2">
-                <label for="motorista">Motorista</label>
-                <select class="border-1 border-orange-600 rounded-xl transition duration-400 py-2 px-3 focus:border-orange-800 focus:ring-0 focus:outline-0" id="motorista" name="motorista">
+                <label for="motorista">Motorista ida</label>
+                <select class="border-1 border-orange-600 rounded-xl transition duration-400 py-2 px-3 focus:border-orange-800 focus:ring-0 focus:outline-0" id="motorista_ida" name="motorista_ida">
+                    <option value="0">Nenhum</option>
+                    @foreach(\App\Models\Funcionario::orderBy("nome", "ASC")->get() as $funcionario)
+                        <option value="{{ $funcionario->cpf }}">{{ $funcionario->nome }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="flex flex-col gap-[5px] my-2">
+                <label for="motorista">Motorista volta</label>
+                <select class="border-1 border-orange-600 rounded-xl transition duration-400 py-2 px-3 focus:border-orange-800 focus:ring-0 focus:outline-0" id="motorista_volta" name="motorista_volta">
                     <option value="0">Nenhum</option>
                     @foreach(\App\Models\Funcionario::orderBy("nome", "ASC")->get() as $funcionario)
                         <option value="{{ $funcionario->cpf }}">{{ $funcionario->nome }}</option>
@@ -101,7 +111,8 @@
                     pet: $("#pet").val(),
                     atendente: $("#atendente").val(),
                     prestador: $("#prestador").val(),
-                    motorista: $("#motorista").val() !== "0" ? $("#motorista").val() : undefined,
+                    motorista: $("#motorista_ida").val() !== "0" ? $("#motorista_ida").val() : undefined,
+                    motorista: $("#motorista_volta").val() !== "0" ? $("#motorista_volta").val() : undefined,
                     data: $("#data").val(),
                     hora: $("#hora").val(),
                     buscar: $("#buscar").is(":checked"),

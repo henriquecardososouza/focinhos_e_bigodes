@@ -34,9 +34,14 @@ class Funcionario extends Model
         return $this->belongsTo(Cargo::class, 'cargo', 'nome');
     }
 
-    public function servicosMotorista()
+    public function servicosMotoristaIda()
     {
-        return $this->belongsToMany(Servico::class, 'cliente_contrata_servico', 'motorista', 'cliente', 'cpf', 'tipo');
+        return $this->belongsToMany(Servico::class, 'cliente_contrata_servico', 'motorista_ida', 'cliente', 'cpf', 'tipo');
+    }
+
+    public function servicosMotoristaVolta()
+    {
+        return $this->belongsToMany(Servico::class, 'cliente_contrata_servico', 'motorista_volta', 'cliente', 'cpf', 'tipo');
     }
 
     public function servicosAtendidos()

@@ -197,7 +197,8 @@ class FuncionarioController extends Controller
             ->where(function ($query) use ($funcionario) {
                 $query->where("cliente_contrata_servico.funcionario", "LIKE", $funcionario->cpf);
                 $query->orWhere("cliente_contrata_servico.atendente", "LIKE", $funcionario->cpf);
-                $query->orWhere("cliente_contrata_servico.motorista", "LIKE", $funcionario->cpf);
+                $query->orWhere("cliente_contrata_servico.motorista_ida", "LIKE", $funcionario->cpf);
+                $query->orWhere("cliente_contrata_servico.motorista_volta", "LIKE", $funcionario->cpf);
             })
             ->select(
                 "clientes.nome as cliente",

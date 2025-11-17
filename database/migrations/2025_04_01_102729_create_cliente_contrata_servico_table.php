@@ -61,9 +61,17 @@ return new class extends Migration
             $table->boolean("agendado")->default(false);
             $table->boolean("buscar_pet")->default(false);
 
-            $table->char("motorista", 11)->nullable();
-            $table->index("motorista", "fk_cliente_agenda_servico_motorista_idx");
-            $table->foreign("motorista", "fk_cliente_agenda_servico_motorista_idx")
+            $table->char("motorista_ida", 11)->nullable();
+            $table->index("motorista_ida", "fk_cliente_agenda_servico_motorista_ida_idx");
+            $table->foreign("motorista_ida", "fk_cliente_agenda_servico_motorista_ida_idx")
+                ->references("cpf")
+                ->on("funcionarios")
+                ->onUpdate("cascade")
+                ->onDelete("cascade");
+
+            $table->char("motorista_volta", 11)->nullable();
+            $table->index("motorista_volta", "fk_cliente_agenda_servico_motorista_volta_idx");
+            $table->foreign("motorista_volta", "fk_cliente_agenda_servico_motorista_volta_idx")
                 ->references("cpf")
                 ->on("funcionarios")
                 ->onUpdate("cascade")

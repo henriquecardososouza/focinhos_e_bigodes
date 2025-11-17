@@ -6,7 +6,7 @@
     <x-navbar />
 
     <main class="my-12">
-        <h1 class="font-dosis text-brown-500 text-4xl mb-8 font-bold">Editar dados do serviço {{ $servico->nome }}</h1>
+        <h1 class="font-dosis text-brown-500 text-4xl mb-8 font-bold">Editar dados do serviço {{ $servico->servico }}</h1>
 
         <div class="flex flex-col justify-center align-center p-6 rounded-xl shadow-[0_0_20px_#00000055] max-w-[400px] w-[95%] mx-auto">
             <h1 class="text-center font-red-hat text-xl mb-4">Editar serviço</h1>
@@ -71,11 +71,21 @@
             </div>
 
             <div class="flex flex-col gap-[5px] my-2">
-                <label for="motorista">Motorista</label>
-                <select class="border-1 border-orange-600 rounded-xl transition duration-400 py-2 px-3 focus:border-orange-800 focus:ring-0 focus:outline-0" id="motorista" name="motorista">
+                <label for="motorista">Motorista ida</label>
+                <select class="border-1 border-orange-600 rounded-xl transition duration-400 py-2 px-3 focus:border-orange-800 focus:ring-0 focus:outline-0" id="motorista_ida" name="motorista_ida">
                     <option value="0">Nenhum</option>
                     @foreach(\App\Models\Funcionario::orderBy("nome", "ASC")->get() as $funcionario)
-                        <option value="{{ $funcionario->cpf }}" @if ($servico->motorista === $funcionario->cpf) selected @endif>{{ $funcionario->nome }}</option>
+                        <option value="{{ $funcionario->cpf }}" @if ($servico->motorista_ida === $funcionario->cpf) selected @endif>{{ $funcionario->nome }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="flex flex-col gap-[5px] my-2">
+                <label for="motorista">Motorista volta</label>
+                <select class="border-1 border-orange-600 rounded-xl transition duration-400 py-2 px-3 focus:border-orange-800 focus:ring-0 focus:outline-0" id="motorista_volta" name="motorista_volta">
+                    <option value="0">Nenhum</option>
+                    @foreach(\App\Models\Funcionario::orderBy("nome", "ASC")->get() as $funcionario)
+                        <option value="{{ $funcionario->cpf }}" @if ($servico->motorista_volta === $funcionario->cpf) selected @endif>{{ $funcionario->nome }}</option>
                     @endforeach
                 </select>
             </div>
@@ -101,7 +111,8 @@
                     pet: $("#pet").val(),
                     atendente: $("#atendente").val(),
                     prestador: $("#prestador").val(),
-                    motorista: $("#motorista").val() !== "0" ? $("#motorista").val() : undefined,
+                    motorista_ida: $("#motorista_ida").val() !== "0" ? $("#motorista_ida").val() : undefined,
+                    motorista_volta: $("#motorista_volta").val() !== "0" ? $("#motorista_volta").val() : undefined,
                     data: $("#data").val(),
                     hora: $("#hora").val(),
                     buscar: $("#buscar").is(":checked"),
