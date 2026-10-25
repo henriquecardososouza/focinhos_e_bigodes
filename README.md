@@ -1,66 +1,114 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="docs/img/logo.png" alt="Focinhos & Bigodes - Amigos de todo mundo" width="300">
 </p>
 
-## About Laravel
+<h1 align="center">Focinhos & Bigodes</h1>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  Sistema web de gestão e atendimento para um PetShop: loja de produtos, serviços de banho e tosa, cadastro de pets e vacinas, tudo em um só lugar.
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Sobre o projeto
 
-## Learning Laravel
+**Focinhos & Bigodes** é uma aplicação web para um PetShop com várias unidades. Ela reúne, em uma única plataforma:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- um **site institucional** público (produtos, serviços, unidades e história da empresa);
+- uma **área do cliente**, onde tutores acompanham seus pets e agendam serviços;
+- um **painel administrativo** (área interna) para os funcionários gerenciarem toda a operação.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+A interface é em português do Brasil.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Funcionalidades
 
-## Laravel Sponsors
+### Site público
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Página inicial** com apresentação da marca, catálogo de **produtos** e de **serviços** (cartões que viram ao passar o mouse para mostrar a descrição) e a seção **Sobre nós**.
+- **Nossas unidades**: listagem das unidades da rede.
+- **Login** e **cadastro** de novos clientes.
+- A barra de navegação muda conforme o perfil: visitante, cliente ou funcionário.
 
-### Premium Partners
+### Área do cliente
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+- **Meus pets**: consulta dos pets cadastrados e de suas vacinas.
+- **Meus serviços contratados**: histórico e situação dos serviços.
+- **Agendar serviço**: escolha do tipo de serviço, do pet, data e hora, com opção de **buscar o pet na residência** do cliente.
 
-## Contributing
+### Painel administrativo (funcionários)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+O painel oferece telas de listagem, cadastro e edição para:
 
-## Code of Conduct
+| Módulo | O que permite gerenciar |
+| --- | --- |
+| **Clientes** | Dados cadastrais, endereço e os pets de cada cliente |
+| **Funcionários** | Cadastro com CPF, cargo, salário, unidade e os serviços prestados por cada um |
+| **Cargos** | Cargos e salários da equipe |
+| **Pets** | Cadastro de pets (raça, data de nascimento, tutor) e controle de vacinas aplicadas |
+| **Vacinas** | Catálogo de vacinas |
+| **Raças e tipos de pet** | Classificação dos animais atendidos |
+| **Serviços contratados** | Registro de serviços com cliente, pet, atendente, prestador, data/hora, indicação de serviço agendado, busca do pet e **motoristas de ida e de volta** |
+| **Tipos de serviço** | Catálogo de serviços oferecidos, com descrição e valor |
+| **Produtos** | Catálogo com descrição, valor e quantidade em estoque |
+| **Vendas** | Registro de vendas (cliente, funcionário, data/hora) e dos produtos vendidos com suas quantidades |
+| **Unidades** | Unidades da rede, com endereço, telefone e gerente (opcional) |
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Tecnologias
 
-## Security Vulnerabilities
+- **Back-end:** [Laravel 12](https://laravel.com) (PHP ^8.2)
+- **Tabelas dinâmicas:** [yajra/laravel-datatables](https://github.com/yajra/laravel-datatables)
+- **Front-end:** Blade, [Tailwind CSS 4](https://tailwindcss.com), [Alpine.js](https://alpinejs.dev), jQuery (requisições AJAX), [Font Awesome](https://fontawesome.com) e notificações via Toastr
+- **Build de assets:** [Vite](https://vitejs.dev)
+- **Banco de dados:** SQLite por padrão em desenvolvimento; PostgreSQL (ex.: Neon) em produção
+- **Deploy:** Docker (`richarvey/nginx-php-fpm`) com script em `scripts/deploy.sh`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Estrutura
 
-## License
+```
+app/                 Controllers, Models e middlewares
+database/            Migrations e seeders
+resources/views/
+  landing.blade.php  Página inicial pública
+  units.blade.php    Unidades
+  auth/              Login e cadastro
+  client/            Área do cliente
+  intern/            Painel administrativo (um diretório por módulo)
+  components/        Navbar, footer e modal
+routes/
+  web.php            Rotas públicas e de autenticação
+  client.php         Rotas da área do cliente
+  intern.php         Rotas do painel administrativo
+docs/img/            Imagens da documentação
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Instalação
+
+Pré-requisitos: PHP 8.2+, Composer, Node.js e npm.
+
+```bash
+git clone https://github.com/henriquecardososouza/focinhos_e_bigodes.git
+cd focinhos_e_bigodes
+
+composer install
+npm install
+
+cp .env.example .env
+php artisan key:generate
+
+php artisan migrate --seed
+
+npm run dev          # em um terminal
+php artisan serve    # em outro terminal
+```
+
+A aplicação ficará disponível em `http://localhost:8000`.
+
+Para gerar os assets de produção, use `npm run build`.
+
+## Deploy
+
+O `Dockerfile` do projeto usa a imagem `richarvey/nginx-php-fpm`. Na inicialização, o `scripts/deploy.sh` instala as dependências, gera os assets, faz o cache de configuração e rotas, executa as migrations e popula o banco.
+
+## Licença
+
+Projeto baseado no Laravel, distribuído sob a licença [MIT](https://opensource.org/licenses/MIT).
